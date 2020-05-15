@@ -1,0 +1,3 @@
+[submodule "GroovyEngine/vendor/spdlog"]
+	path = GroovyEngine/vendor/spdlog
+	url = https://github.com/gabime/spdlog
