@@ -1,7 +1,7 @@
 #pragma once
 #include "Core.h"
 #include "spdlog/spdlog.h"
-#include <memory>
+#include "spdlog/fmt/ostr.h" //Output stream for spdlog
 
 namespace GroovyEngine {
 

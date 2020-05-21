@@ -12,3 +12,6 @@
 #else
 	#error The Groovy Engine only supports Windows!
 #endif
+
+//Macro to left-shift a bit of x position
+#define BIT(x) (1 << x)

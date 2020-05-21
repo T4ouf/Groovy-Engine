@@ -18,6 +18,9 @@ project "GroovyEngine"
 	targetdir ("bin/" .. outputdir .. "/%{prj.name}")
 	objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
 
+	pchheader "gepch.h"
+	pchsource "GroovyEngine/src/gepch.cpp"
+
 	files
 	{
 		"%{prj.name}/src/**.h",
@@ -26,6 +29,7 @@ project "GroovyEngine"
 
 	includedirs
 	{
+		"%{prj.name}/src",
 		"%{prj.name}/vendor/spdlog/include"
 	}
 

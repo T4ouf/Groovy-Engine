@@ -4,6 +4,9 @@
     <Filter Include="Groovy">
       <UniqueIdentifier>{CBF8CAB5-B79A-F58B-A055-09E08C967CDC}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Groovy\Events">
+      <UniqueIdentifier>{4F726DF8-BB32-E92E-846D-32ACF0EC2D0B}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Groovy\Application.h">
@@ -15,10 +18,23 @@
     <ClInclude Include="src\Groovy\EntryPoint.h">
       <Filter>Groovy</Filter>
     </ClInclude>
+    <ClInclude Include="src\Groovy\Events\ApplicationEvent.h">
+      <Filter>Groovy\Events</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Groovy\Events\Event.h">
+      <Filter>Groovy\Events</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Groovy\Events\KeyEvent.h">
+      <Filter>Groovy\Events</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Groovy\Events\MouseEvent.h">
+      <Filter>Groovy\Events</Filter>
+    </ClInclude>
     <ClInclude Include="src\Groovy\Log.h">
       <Filter>Groovy</Filter>
     </ClInclude>
     <ClInclude Include="src\GroovyEngine.h" />
+    <ClInclude Include="src\gepch.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Groovy\Application.cpp">
@@ -27,5 +43,6 @@
     <ClCompile Include="src\Groovy\Log.cpp">
       <Filter>Groovy</Filter>
     </ClCompile>
+    <ClCompile Include="src\gepch.cpp" />
   </ItemGroup>
 </Project>
