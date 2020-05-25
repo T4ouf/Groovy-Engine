@@ -16,6 +16,8 @@
 #include <unordered_map>
 #include <unordered_set>
 
+#include "Groovy/Log.h"
+
 //Platform specific headers
 #ifdef GE_PLATFORM_WINDOWS
 	#include <Windows.h>

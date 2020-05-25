@@ -10,6 +10,13 @@ workspace "GroovyEngine"
 
 outputdir = "%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"
 
+-- Include directories relative to root folder (solution directory)
+IncludeDir = {}
+IncludeDir["GLFW"] = "GroovyEngine/vendor/GLFW/include"
+
+-- Include GLFW project and its premake file
+include "GroovyEngine/vendor/GLFW"
+
 project "GroovyEngine"
 	location "GroovyEngine"
 	kind "SharedLib"
@@ -30,7 +37,13 @@ project "GroovyEngine"
 	includedirs
 	{
 		"%{prj.name}/src",
-		"%{prj.name}/vendor/spdlog/include"
+		"%{prj.name}/vendor/spdlog/include",
+		"%{IncludeDir.GLFW}"
+	}
+
+	links{
+		"GLFW",
+		"opengl32.lib"
 	}
 
 	filter "system:windows"
@@ -50,7 +63,10 @@ project "GroovyEngine"
 		}
 
 	filter "configurations:Debug"
-		defines "GE_DEBUG"
+		defines {
+			"GE_DEBUG",
+			"GE_ENABLE_ASSERTS"
+		}
 		symbols "On"
 
 	filter "configurations:Release"

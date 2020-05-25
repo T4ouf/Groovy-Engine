@@ -7,6 +7,9 @@
     <Filter Include="Groovy\Events">
       <UniqueIdentifier>{4F726DF8-BB32-E92E-846D-32ACF0EC2D0B}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Platform">
+      <UniqueIdentifier>{2AC788B4-1694-E3BF-3FAD-D1672BD9184E}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Groovy\Application.h">
@@ -33,7 +36,13 @@
     <ClInclude Include="src\Groovy\Log.h">
       <Filter>Groovy</Filter>
     </ClInclude>
+    <ClInclude Include="src\Groovy\Window.h">
+      <Filter>Groovy</Filter>
+    </ClInclude>
     <ClInclude Include="src\GroovyEngine.h" />
+    <ClInclude Include="src\Platform\WindowsWindow.h">
+      <Filter>Platform</Filter>
+    </ClInclude>
     <ClInclude Include="src\gepch.h" />
   </ItemGroup>
   <ItemGroup>
@@ -42,6 +51,9 @@
     </ClCompile>
     <ClCompile Include="src\Groovy\Log.cpp">
       <Filter>Groovy</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Platform\WindowsWindow.cpp">
+      <Filter>Platform</Filter>
     </ClCompile>
     <ClCompile Include="src\gepch.cpp" />
   </ItemGroup>
