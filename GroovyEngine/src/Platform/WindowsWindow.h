@@ -5,7 +5,10 @@
 
 namespace GroovyEngine {
 
-	//Windows implementation of a window for the Groovy Engine
+	/**
+	 * Windows implementation of a window for the Groovy Engine
+	 * Implementation based on GLFW library
+	 */
 	class WindowsWindow : public Window {
 	private:
 		GLFWwindow* m_Window;

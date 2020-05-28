@@ -17,9 +17,14 @@ namespace GroovyEngine {
 		WindowProps(const std::string& title = "Groovy Engine", unsigned int width = 1280, unsigned int height = 720) : Title(title), Width(width), Height(height){}
 	};
 
-	//Interface representing a desktop system-based window
+	/**
+	 * Abstract Window class (Interface) : 
+	 * Interface representing a window (for desktop platforms), 
+	 * it is an abstract representation of a window that will be implemented in a specific class for each system
+	 */
 	class GE_API Window {
 	public:
+		//An event callback is a function that takes an Event ref and returns void
 		using EventCallbackFn = std::function<void(Event&)>;
 
 		//Virtual destructor

@@ -37,12 +37,20 @@ namespace GroovyEngine {
 	//Define the categories of the event based on the input
 	#define EVENT_CLASS_CATEGORY(category) virtual int GetCategoryFlags() const override { return category; }
 
-	//Abstract Event class : represents the base of all events in the Groovy Engine
+	/**
+	 * Abstract Event class :
+	 * Abstract representation of an event that will be implemented in a specific class for each type of event
+	 * (It represents the base of all events in the Groovy Engine)
+	 */
 	class GE_API Event {
 
 		friend class EventDispatcher; //The event dispatcher must access event properties
 	
 	public:
+
+		//Is the event handled somewhere ?
+		bool Handled = false;
+
 		//Getters
 		virtual EventType GetEventType() const = 0;
 		virtual const char* GetName() const = 0;
@@ -54,9 +62,6 @@ namespace GroovyEngine {
 			return GetCategoryFlags() & category; //We check the right bit with a binary AND
 		}
 
-	protected:
-		//Is the event handled somewhere ?
-		bool m_Handled = false;
 	};
 
 
@@ -78,7 +83,7 @@ namespace GroovyEngine {
 			//If the event we are trying to dispatch has the same type as the callback provided (as a parameter)...
 			if (m_Event.GetEventType() == T::GetStaticType()) {
 				//then we run the callback
-				m_Event.m_Handled = f(*(T*)&m_Event);
+				m_Event.Handled = f(*(T*)&m_Event);
 				return true;	//and notify that we dispatched the event
 			}
 

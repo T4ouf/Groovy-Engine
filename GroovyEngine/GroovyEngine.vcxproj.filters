@@ -33,6 +33,12 @@
     <ClInclude Include="src\Groovy\Events\MouseEvent.h">
       <Filter>Groovy\Events</Filter>
     </ClInclude>
+    <ClInclude Include="src\Groovy\Layer.h">
+      <Filter>Groovy</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Groovy\LayerStack.h">
+      <Filter>Groovy</Filter>
+    </ClInclude>
     <ClInclude Include="src\Groovy\Log.h">
       <Filter>Groovy</Filter>
     </ClInclude>
@@ -47,6 +53,12 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Groovy\Application.cpp">
+      <Filter>Groovy</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Groovy\Layer.cpp">
+      <Filter>Groovy</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Groovy\LayerStack.cpp">
       <Filter>Groovy</Filter>
     </ClCompile>
     <ClCompile Include="src\Groovy\Log.cpp">
