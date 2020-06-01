@@ -8,14 +8,23 @@ workspace "GroovyEngine"
 		"Dist"
 	}
 
+	startproject "Sandbox"
+
 outputdir = "%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"
 
 -- Include directories relative to root folder (solution directory)
 IncludeDir = {}
 IncludeDir["GLFW"] = "GroovyEngine/vendor/GLFW/include"
+IncludeDir["Glad"] = "GroovyEngine/vendor/Glad/include"
+IncludeDir["ImGui"] = "GroovyEngine/vendor/imgui/"
 
 -- Include GLFW project and its premake file
 include "GroovyEngine/vendor/GLFW"
+-- Include Glad (OpenGL) project and its premake file
+include "GroovyEngine/vendor/Glad"
+-- Include ImGui project and its premake file
+include "GroovyEngine/vendor/imgui"
+
 
 project "GroovyEngine"
 	location "GroovyEngine"
@@ -38,12 +47,16 @@ project "GroovyEngine"
 	{
 		"%{prj.name}/src",
 		"%{prj.name}/vendor/spdlog/include",
-		"%{IncludeDir.GLFW}"
+		"%{IncludeDir.GLFW}",
+		"%{IncludeDir.Glad}",
+		"%{IncludeDir.ImGui}"
 	}
 
 	links{
 		"GLFW",
-		"opengl32.lib"
+		"Glad",
+		"opengl32.lib",
+		"ImGui"
 	}
 
 	filter "system:windows"
@@ -54,12 +67,13 @@ project "GroovyEngine"
 		defines
 		{
 			"GE_PLATFORM_WINDOWS",
-			"GE_BUILD_DLL"
+			"GE_BUILD_DLL",
+			"GLFW_INCLUDE_NONE"
 		}
 
 		postbuildcommands
 		{
-			("{COPY} %{cfg.buildtarget.relpath} ../bin/" .. outputdir .. "/Sandbox")
+			("{COPY} %{cfg.buildtarget.relpath} \"../bin/" .. outputdir .. "/Sandbox/\"")
 		}
 
 	filter "configurations:Debug"

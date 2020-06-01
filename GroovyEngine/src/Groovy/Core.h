@@ -24,3 +24,6 @@
 
 //Macro to left-shift a bit of x position
 #define BIT(x) (1 << x)
+
+//Macro to bind a function to an event
+#define GE_BIND_EVENT_FN(function) std::bind(&function, this, std::placeholders::_1)

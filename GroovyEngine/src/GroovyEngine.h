@@ -4,6 +4,7 @@
 
 #include "Groovy/Application.h"
 #include "Groovy/Layer.h"
+#include "Groovy/ImGui/ImGuiLayer.h"
 #include "Groovy/Log.h"
 
 // --- Entry Point ---

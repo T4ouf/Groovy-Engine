@@ -1,6 +1,8 @@
 #include "gepch.h"
 #include "WindowsWindow.h"
 
+#include "glad/glad.h"
+
 //include events
 #include "Groovy/Events/ApplicationEvent.h"
 #include "Groovy/Events/KeyEvent.h"
@@ -43,6 +45,12 @@ namespace GroovyEngine {
 		//We create the window
 		m_Window = glfwCreateWindow((int)props.Width, (int)props.Height, props.Title.c_str(), nullptr, nullptr);
 		glfwMakeContextCurrent(m_Window);
+
+		//Load OpenGL functions from Glad
+		int status = gladLoadGLLoader((GLADloadproc)glfwGetProcAddress);
+		//ASSERT Successful loading
+		GE_CORE_ASSERT(status, "Failed to initialize Glad !");
+
 		glfwSetWindowUserPointer(m_Window, &m_Data);
 		SetVSync(true);
 
@@ -104,6 +112,16 @@ namespace GroovyEngine {
 				
 			}
 		);
+
+		// Char callback
+		glfwSetCharCallback(m_Window, [](GLFWwindow* window, unsigned int keycode) {
+
+			WindowData& data = *(WindowData*)glfwGetWindowUserPointer(window); //We retrieve the data tha we attached to our window (m_data)
+			KeyTypedEvent event(keycode);
+			data.EventCallback(event); //Dispatch the event
+
+		});
+
 
 		//Mouse button callbacks
 		glfwSetMouseButtonCallback(m_Window,

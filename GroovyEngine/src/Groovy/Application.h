@@ -11,6 +11,7 @@ namespace GroovyEngine {
 
 
 	class GE_API Application{
+		
 	private:
 
 		std::unique_ptr<Window> m_Window; //application's window
@@ -21,6 +22,8 @@ namespace GroovyEngine {
 
 		bool OnWindowClosed(WindowCloseEvent& e);
 
+		static Application* s_Instance;
+
 	public:
 		Application();
 		virtual ~Application();
@@ -28,6 +31,9 @@ namespace GroovyEngine {
 		void OnEvent(Event& e);
 		void PushLayer(Layer* layer);
 		void PushOverlay(Layer* overlay);
+
+		inline static Application& Get() { return *s_Instance; }
+		inline Window& GetWindow() { return *m_Window; }
 
 		void Run();
 

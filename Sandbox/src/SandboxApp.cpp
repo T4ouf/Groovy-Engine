@@ -22,6 +22,7 @@ class Sandbox : public GroovyEngine::Application {
 public:
 	Sandbox() {
 		PushLayer(new ExampleLayer());
+		PushOverlay(new GroovyEngine::ImGuiLayer());
 	}
 
 	~Sandbox() {

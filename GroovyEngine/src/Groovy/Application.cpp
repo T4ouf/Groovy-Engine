@@ -2,16 +2,18 @@
 #include "Application.h"
 
 namespace GroovyEngine {
-
-#define BIND_EVENT_FN(x) std::bind(&Application::x, this, std::placeholders::_1)
-
-
+	
+	Application* Application::s_Instance = nullptr;
 
 	Application::Application() {
+		//ensure Application is a singleton
+		GE_CORE_ASSERT(s_Instance == nullptr, "Application already exists !")
+		s_Instance = this;
+
 		m_Window = std::unique_ptr<Window>(Window::Create());
 
 		//We bind the OnEvent() function to the window callback
-		m_Window->SetEventCallBack(BIND_EVENT_FN(OnEvent));
+		m_Window->SetEventCallBack(GE_BIND_EVENT_FN(Application::OnEvent));
 	}
 	
 	Application::~Application() {}
@@ -20,7 +22,7 @@ namespace GroovyEngine {
 
 		EventDispatcher eventDispatcher = EventDispatcher(e);
 
-		eventDispatcher.Dispatch<WindowCloseEvent>(BIND_EVENT_FN(OnWindowClosed));	//We bind "WindowCloseEvent" to the OnWindowClosed function
+		eventDispatcher.Dispatch<WindowCloseEvent>(GE_BIND_EVENT_FN(Application::OnWindowClosed));	//We bind "WindowCloseEvent" to the OnWindowClosed function
 
 		//reversed-iteration of the layer stack
 		for (auto it = m_LayerStack.end(); it != m_LayerStack.begin();) {
@@ -38,10 +40,12 @@ namespace GroovyEngine {
 
 	void Application::PushLayer(Layer* layer) {
 		m_LayerStack.PushLayer(layer);
+		layer->OnAttach();
 	}
 
 	void Application::PushOverlay(Layer* overlay) {
 		m_LayerStack.PushOverlay(overlay);
+		overlay->OnAttach();
 	}
 
 	void Application::Run() {
