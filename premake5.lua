@@ -18,18 +18,21 @@ IncludeDir["GLFW"] = "GroovyEngine/vendor/GLFW/include"
 IncludeDir["Glad"] = "GroovyEngine/vendor/Glad/include"
 IncludeDir["ImGui"] = "GroovyEngine/vendor/imgui/"
 
--- Include GLFW project and its premake file
-include "GroovyEngine/vendor/GLFW"
--- Include Glad (OpenGL) project and its premake file
-include "GroovyEngine/vendor/Glad"
--- Include ImGui project and its premake file
-include "GroovyEngine/vendor/imgui"
+group "Dependencies"
+	-- Include GLFW project and its premake file
+	include "GroovyEngine/vendor/GLFW"
+	-- Include Glad (OpenGL) project and its premake file
+	include "GroovyEngine/vendor/Glad"
+	-- Include ImGui project and its premake file
+	include "GroovyEngine/vendor/imgui"
 
+group ""
 
 project "GroovyEngine"
 	location "GroovyEngine"
 	kind "SharedLib"
 	language "C++"
+	staticruntime "off" --We build the Groovy Engine as a Dynamic Library => staticruntime must be off
 
 	targetdir ("bin/" .. outputdir .. "/%{prj.name}")
 	objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
@@ -61,7 +64,6 @@ project "GroovyEngine"
 
 	filter "system:windows"
 		cppdialect "C++17"
-		staticruntime "On"
 		systemversion "latest"
 
 		defines
@@ -81,23 +83,24 @@ project "GroovyEngine"
 			"GE_DEBUG",
 			"GE_ENABLE_ASSERTS"
 		}
-		buildoptions "/MDd"
+		runtime "Debug"
 		symbols "On"
 
 	filter "configurations:Release"
 		defines "GE_RELEASE"
-		buildoptions "/MD"
+		runtime "Release"
 		optimize "On"
 
 	filter "configurations:Dist"
 		defines "GE_DIST"
-		buildoptions "/MD"
+		runtime "Release"
 		optimize "On"
 
 project "Sandbox"
 	location "Sandbox"
 	kind "ConsoleApp"
 	language "C++"
+	staticruntime "off"
 
 	targetdir ("bin/" .. outputdir .. "/%{prj.name}")
 	objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
@@ -121,7 +124,6 @@ project "Sandbox"
 
 	filter "system:windows"
 		cppdialect "C++17"
-		staticruntime "On"
 		systemversion "latest"
 
 		defines
@@ -131,15 +133,15 @@ project "Sandbox"
 
 	filter "configurations:Debug"
 		defines "GE_DEBUG"
-		buildoptions "/MDd"
+		runtime "Debug"
 		symbols "On"
 
 	filter "configurations:Release"
 		defines "GE_RELEASE"
-		buildoptions "/MD"
+		runtime "Release"
 		optimize "On"
 
 	filter "configurations:Dist"
 		defines "GE_DIST"
-		buildoptions "/MD"
+		runtime "Release"
 		optimize "On"
